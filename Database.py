@@ -2,9 +2,10 @@ class Database:
     _connection = None
 
     @classmethod
-    def fetch_names(cls):
-        from ShowNames import ShowNames
+    def fetch_genders(cls):
+        from ShowGenders import ShowGenders
 
         return [
-            ShowNames("Marc")
+            ShowGenders("Male"),
+            ShowGenders("Female")
         ]
