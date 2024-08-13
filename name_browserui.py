@@ -20,19 +20,33 @@ class Name_BrowserUI:
     def __init__(self, master=None):
         self.start_ui(master)
         self.setup_gender_entry()
+        # self.setup_type_combo()
 
     def start_ui(self, master):
-        self.builder = pygubu.Builder()
-        self.builder.add_resource_paths(RESOURCE_PATHS)
-        self.builder.add_from_file(PROJECT_UI)
-        self.main_window: ttk.Frame = self.builder.get_object("top_level1", master)
-        self.builder.connect_callbacks(self)
+        self.__builder = pygubu.Builder()
+        self.__builder.add_resource_paths(RESOURCE_PATHS)
+        self.__builder.add_from_file(PROJECT_UI)
+        self.main_window: ttk.Frame = self.__builder.get_object("top_level1", master)
+        self.__builder.connect_callbacks(self)
 
-        self.gender_combo = self.builder.get_object('gender_combo', master)
-
+        self.__gender_combo = self.__builder.get_object('gender_combo', master)
+        self.__name_entry = self.__builder.get_object('name_entry', master)
+        self.__tree = self.__builder.get_object('show_tree', master)
     def setup_gender_entry(self):
         genders = ShowGenders.fetch_genders()
-        self.gender_combo['values'] = [ShowGenders.ALL_GENDERS] + [gender.get_gender() for gender in genders]
+        self.__gender_combo['values'] = [ShowGenders.ALL_GENDERS] + [gender.get_gender() for gender in genders]
+        self.__gender_combo.current(0)
+
+    def gender_selected(self, event):
+        print("Gender Changed:", self.__gender_combo.get())
+        self.fetch_names()
+
+    def names_changed(self, event):
+        print("Names Changed:", self.__name_entry.get())
+        self.fetch_names()
+
+    def fetch_names(self):
+        pass
 
     def run(self):
         self.main_window.mainloop()
@@ -40,6 +54,6 @@ class Name_BrowserUI:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title("Name Popularity per Year")
+    root.title("Name Popularity per Year and Gender")
     app = Name_BrowserUI(root)
     app.run()

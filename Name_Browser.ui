@@ -50,6 +50,7 @@
         </containerlayout>
         <child>
           <object class="ttk.Combobox" id="gender_combo" named="True">
+            <property name="state">readonly</property>
             <property name="width">6</property>
             <layout manager="grid">
               <property name="column">1</property>
@@ -61,6 +62,7 @@
         </child>
         <child>
           <object class="ttk.Entry" id="name_entry" named="True">
+            <bind sequence="&lt;KeyRelease&gt;" handler="names_changed" add="" />
             <layout manager="grid">
               <property name="column">0</property>
               <property name="padx">3</property>
@@ -82,7 +84,7 @@
           <property name="sticky">nsew</property>
         </layout>
         <child>
-          <object class="ttk.Treeview" id="Treeview_1">
+          <object class="ttk.Treeview" id="show_tree" named="True">
             <property name="height">15</property>
             <property name="selectmode">extended</property>
             <layout manager="grid">
