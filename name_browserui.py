@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+
+# Made by Nicole Sausville
+# Due Date: 8/16/24
+# Description: A GUI interface for interacting with
+#              the Names database.
+
 import pathlib
 import tkinter as tk
 import pygubu
