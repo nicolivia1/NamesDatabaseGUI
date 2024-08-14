@@ -17,11 +17,12 @@ RESOURCE_PATHS = [PROJECT_PATH]
 
 class Name_BrowserUI:
     def __init__(self, master=None):
-        self.start_ui(master)
+        self.init_ui(master)
+        self.setup_tree()
         self.setup_gender_entry()
         # self.setup_type_combo()
 
-    def start_ui(self, master):
+    def init_ui(self, master):
         self.__builder = pygubu.Builder()
         self.__builder.add_resource_paths(RESOURCE_PATHS)
         self.__builder.add_from_file(PROJECT_UI)
@@ -31,6 +32,21 @@ class Name_BrowserUI:
         self.__gender_combo = self.__builder.get_object('gender_combo', master)
         self.__name_entry = self.__builder.get_object('name_entry', master)
         self.__tree = self.__builder.get_object('show_tree', master)
+
+    def setup_tree(self):
+        tree = self.__tree
+
+        tree.configure(columns=(0, 1, 2, 3), displaycolumns=(0, 1, 2, 3))
+
+        tree.heading(0, text="Name", anchor=tk.W)
+        tree.heading(1, text="Gender")
+        tree.heading(2, text="Year")
+        tree.heading(3, text="Count")
+
+        tree.column(0, width=250)
+        tree.column(1, width=100)
+        tree.column(2, width=100)
+        tree.column(3, width=100)
 
     def setup_gender_entry(self):
         genders = ShowGenders.fetch_genders()
@@ -45,10 +61,20 @@ class Name_BrowserUI:
         print("Names Changed:", self.__name_entry.get())
         self.fetch_names()
 
+    @staticmethod
+    def names_to_tuple(show):
+        return(
+            show.get_name(),
+            show.get_gender(),
+            show.get_year(),
+            show.get_count()
+        )
+
     def fetch_names(self):
         name_entry = self.__name_entry.get()
         shows = Show.fetch_names(self.__gender_combo.get(), name_entry)
-        pass
+        for i in range(len(shows)):
+            self.__tree.insert("","end", values=Name_BrowserUI.names_to_tuple(shows[i]))
 
     def run(self):
         self.main_window.mainloop()

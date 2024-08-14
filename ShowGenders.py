@@ -9,6 +9,15 @@ class Show:
         self.__year = Year
         self.__name_count = NameCount
 
+    def get_name(self):
+        return self.__name
+    def get_gender(self):
+        return self.__gender
+    def get_year(self):
+        return self.__year
+    def get_count(self):
+        return self.__name_count
+
     @staticmethod
     def fetch_names(gender, name_entry):
         return Database.fetch_names(gender, name_entry)
