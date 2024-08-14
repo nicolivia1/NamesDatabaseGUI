@@ -41,7 +41,7 @@ class Database:
         from ShowGenders import Show, ShowGenders
 
         sql = """
-        SELECT TOP 50 Name, Gender, Year, NameCount
+        SELECT TOP 50 Name, Gender, Year, NameCount, Total
         FROM all_data
         WHERE Name = ?
         """
@@ -65,7 +65,7 @@ class Database:
         shows = []
         show = cursor.fetchone()
         while show:
-            shows.append(Show(show[0], show[1], show[2], show[3]))
+            shows.append(Show(show[0], show[1], show[2], show[3], show[4]))
             show = cursor.fetchone()
         return shows
 

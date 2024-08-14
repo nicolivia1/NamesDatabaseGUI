@@ -3,6 +3,7 @@
 # Made by Nicole Sausville
 # Due Date: 8/16/24
 # Description: A GUI interface for interacting with the Names database.
+# Tutoring
 
 import pathlib
 import tkinter as tk
@@ -37,17 +38,19 @@ class Name_BrowserUI:
     def setup_tree(self):
         tree = self.__tree
 
-        tree.configure(columns=(0, 1, 2, 3), displaycolumns=(0, 1, 2, 3))
+        tree.configure(columns=(0, 1, 2, 3, 4), displaycolumns=(0, 1, 2, 3, 4))
 
         tree.heading(0, text="Name", anchor=tk.W)
         tree.heading(1, text="Gender")
         tree.heading(2, text="Year")
-        tree.heading(3, text="Count")
+        tree.heading(3, text="NameCount")
+        tree.heading(4, text="Total")
 
         tree.column(0, width=50)
         tree.column(1, width=50, anchor=tk.CENTER)
         tree.column(2, width=50, anchor=tk.CENTER)
-        tree.column(3, width=100, anchor=tk.CENTER)
+        tree.column(3, width=80, anchor=tk.CENTER)
+        tree.column(4, width=80, anchor=tk.CENTER)
 
     def setup_gender_entry(self):
         genders = ShowGenders.fetch_genders()
@@ -68,7 +71,8 @@ class Name_BrowserUI:
             show.get_name(),
             show.get_gender(),
             show.get_year(),
-            show.get_count()
+            show.get_count(),
+            show.get_total()
         )
 
     # Receives info from Show Class

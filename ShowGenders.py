@@ -3,11 +3,12 @@ from Database import Database
 class Show:
 
     #Name, Gender, Year, NameCount
-    def __init__(self, Name, Gender, Year, NameCount):
+    def __init__(self, Name, Gender, Year, NameCount, Total):
         self.__name = Name
         self.__gender = Gender
         self.__year = Year
         self.__name_count = NameCount
+        self.__total = Total
 
     def get_name(self):
         return self.__name
@@ -17,6 +18,8 @@ class Show:
         return self.__year
     def get_count(self):
         return self.__name_count
+    def get_total(self):
+        return self.__total
 
     @staticmethod
     def fetch_names(gender, name_entry):
