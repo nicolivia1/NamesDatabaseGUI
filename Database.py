@@ -38,18 +38,30 @@ class Database:
 
     @classmethod
     def fetch_names(cls, gender, name_entry):
-        from ShowGenders import Show
+        from ShowGenders import Show, ShowGenders
 
         sql = """
         SELECT TOP 50 Name, Gender, Year, NameCount
         FROM all_data
-        WHERE Gender = ? AND Name = ?
-        ORDER BY Year ASC
+        WHERE Name = ?
         """
+
+        if gender != ShowGenders.ALL_GENDERS:
+            sql = sql + """
+            AND Gender = ?
+            """
+
+        sql = sql + """
+        ORDER BY Year DESC;
+            """
 
         cls.connect()
         cursor = cls.__connection.cursor()
-        cursor.execute(sql, gender, name_entry)
+
+        if gender != ShowGenders.ALL_GENDERS:
+            cursor.execute(sql, name_entry, gender)
+        else:
+            cursor.execute(sql, name_entry)
         shows = []
         show = cursor.fetchone()
         while show:

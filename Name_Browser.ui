@@ -45,24 +45,25 @@
           <property name="sticky">ew</property>
         </layout>
         <containerlayout manager="grid">
-          <property type="col" id="0" name="weight">2</property>
+          <property type="col" id="0" name="weight">1</property>
           <property type="col" id="2" name="weight">1</property>
         </containerlayout>
         <child>
           <object class="ttk.Combobox" id="gender_combo" named="True">
             <property name="state">readonly</property>
-            <property name="width">6</property>
+            <property name="width">16</property>
             <bind sequence="&lt;&lt;ComboboxSelected&gt;&gt;" handler="gender_changed" add="" />
             <layout manager="grid">
               <property name="column">1</property>
               <property name="padx">3</property>
               <property name="row">0</property>
-              <property name="sticky">e</property>
+              <property name="sticky">ew</property>
             </layout>
           </object>
         </child>
         <child>
           <object class="ttk.Entry" id="name_entry" named="True">
+            <property name="text" translatable="yes">(Type a name...)</property>
             <bind sequence="&lt;KeyRelease&gt;" handler="names_changed" add="" />
             <layout manager="grid">
               <property name="column">0</property>
@@ -77,8 +78,10 @@
     <child>
       <object class="pygubu.builder.widgets.scrollbarhelper" id="Scrollbarhelper_1">
         <property name="padding">5</property>
-        <property name="scrolltype">both</property>
+        <property name="relief">groove</property>
+        <property name="scrolltype">vertical</property>
         <property name="usemousewheel">false</property>
+        <property name="width">1200</property>
         <layout manager="grid">
           <property name="column">0</property>
           <property name="row">1</property>

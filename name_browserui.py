@@ -21,6 +21,7 @@ class Name_BrowserUI:
         self.setup_tree()
         self.setup_gender_entry()
         # self.setup_type_combo()
+        self.fetch_names()
 
     def init_ui(self, master):
         self.__builder = pygubu.Builder()
@@ -70,9 +71,16 @@ class Name_BrowserUI:
             show.get_count()
         )
 
+    # Receives info from Show Class
     def fetch_names(self):
-        name_entry = self.__name_entry.get()
+        name_entry = self.__name_entry.get().capitalize()
         shows = Show.fetch_names(self.__gender_combo.get(), name_entry)
+
+        # Resets the tree when new input is given
+        for i in self.__tree.get_children():
+            self.__tree.delete(i)
+
+        # Displays the tree
         for i in range(len(shows)):
             self.__tree.insert("","end", values=Name_BrowserUI.names_to_tuple(shows[i]))
 
