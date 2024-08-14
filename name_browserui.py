@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 
-# Made by Nicole Sausville
+# Made By: Nicole Sausville
 # Due Date: 8/16/24
 # Description: A GUI interface for interacting with the Names database.
-# Tutoring
+# Sources: Tutoring
 
 import pathlib
 import tkinter as tk
 import pygubu
 import tkinter.ttk as ttk
-from ShowGenders import ShowGenders, Show
+from ShowGenders import ShowGenders, NameInfo
 
 PROJECT_PATH = pathlib.Path(__file__).parent
 PROJECT_UI = PROJECT_PATH / "Name_Browser.ui"
@@ -78,7 +78,7 @@ class Name_BrowserUI:
     # Receives info from Show Class
     def fetch_names(self):
         name_entry = self.__name_entry.get().capitalize()
-        shows = Show.fetch_names(self.__gender_combo.get(), name_entry)
+        shows = NameInfo.fetch_names(self.__gender_combo.get(), name_entry)
 
         # Resets the tree when new input is given
         for i in self.__tree.get_children():

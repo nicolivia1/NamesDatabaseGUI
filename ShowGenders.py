@@ -1,8 +1,8 @@
 from Database import Database
 
-class Show:
 
-    #Name, Gender, Year, NameCount
+class NameInfo:
+
     def __init__(self, Name, Gender, Year, NameCount, Total):
         self.__name = Name
         self.__gender = Gender
@@ -12,18 +12,23 @@ class Show:
 
     def get_name(self):
         return self.__name
+
     def get_gender(self):
         return self.__gender
+
     def get_year(self):
         return self.__year
+
     def get_count(self):
         return self.__name_count
+
     def get_total(self):
         return self.__total
 
     @staticmethod
     def fetch_names(gender, name_entry):
         return Database.fetch_names(gender, name_entry)
+
 
 class ShowGenders:
     ALL_GENDERS = '--Select Gender --'
@@ -37,7 +42,3 @@ class ShowGenders:
     @staticmethod
     def fetch_genders():
         return Database.fetch_genders()
-
-
-class ShowNames:
-    pass

@@ -1,9 +1,9 @@
-# Imports
 import pyodbc
 
 
 class Database:
     __connection = None
+
     @classmethod
     def connect(cls):
         if cls.__connection is None:
@@ -38,7 +38,7 @@ class Database:
 
     @classmethod
     def fetch_names(cls, gender, name_entry):
-        from ShowGenders import Show, ShowGenders
+        from ShowGenders import NameInfo, ShowGenders
 
         sql = """
         SELECT TOP 50 Name, Gender, Year, NameCount, Total
@@ -65,7 +65,6 @@ class Database:
         shows = []
         show = cursor.fetchone()
         while show:
-            shows.append(Show(show[0], show[1], show[2], show[3], show[4]))
+            shows.append(NameInfo(show[0], show[1], show[2], show[3], show[4]))
             show = cursor.fetchone()
         return shows
-
