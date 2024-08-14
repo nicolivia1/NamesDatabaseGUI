@@ -43,17 +43,17 @@ class Name_BrowserUI:
         tree.heading(2, text="Year")
         tree.heading(3, text="Count")
 
-        tree.column(0, width=250)
-        tree.column(1, width=100)
-        tree.column(2, width=100)
-        tree.column(3, width=100)
+        tree.column(0, width=50)
+        tree.column(1, width=50, anchor=tk.CENTER)
+        tree.column(2, width=50, anchor=tk.CENTER)
+        tree.column(3, width=100, anchor=tk.CENTER)
 
     def setup_gender_entry(self):
         genders = ShowGenders.fetch_genders()
         self.__gender_combo['values'] = [ShowGenders.ALL_GENDERS] + [gender.get_gender() for gender in genders]
         self.__gender_combo.current(0)
 
-    def gender_selected(self, event):
+    def gender_changed(self, event):
         print("Gender Changed:", self.__gender_combo.get())
         self.fetch_names()
 
